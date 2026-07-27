@@ -26,13 +26,13 @@
 
 # EIP의 퍼블릭 IP 출력
 # output "public_ip" {
-#     value = aws_eip.DE-AI-25-IaC-TF-EIP.public_ip
+#     value = aws_eip.DE-AI-12-IaC-TF-EIP.public_ip
 # }
 # Ec2 생성시 자동으로 부여되는 IP
 output "public_ip" {
-    value = aws_instance.DE-AI-25-IaC-TF.public_ip
+    value = aws_instance.DE-AI-12-IaC-TF.public_ip
 }
 # Ec2 인스턴스 ID 출력
 output "instance_id" {
-    value = aws_instance.DE-AI-25-IaC-TF.id
+    value = aws_instance.DE-AI-12-IaC-TF.id
 }
