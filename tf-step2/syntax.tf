@@ -61,9 +61,9 @@ output "instance_count" {
 
 # locals
 locals {
-    project = "테라폼"
-    env = "pod"
-    name = "${local.project}-${local.env}-${var.environment}"
+  project = "테라폼"
+  env     = "pod"
+  name    = "${local.project}-${local.env}-${var.environment}"
 }
 output "local_value" {
   value = local.name

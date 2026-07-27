@@ -16,7 +16,7 @@ data "aws_subnets" "default" {
 # 3. 보안그룹 생성 선언 - EC2 진입 하는데 인바운드 IP/포트, 아웃바운드 IP/포트 설정 => 접근 제한!!
 resource "aws_security_group" "DE-AI-12-IaC-TF-GROUP" {
   # 메타 정보
-  name = "terraform-12-sg2"
+  name = "terraform-12-sg3"
   # ASCII만 지원
   description = "de-ai-12 security group"
   # 보안 그룹은 VPC에 종속되어서 구성됨
