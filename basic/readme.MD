@@ -42,7 +42,6 @@ No changes. Your infrastructure matches the configuration.
 
 Terraform has compared your real infrastructure against your configuration and found no differences, so no
 changes are needed.
-```
 --- 실제
 provider -> resource(보안그룹, VPC, EIP,..) 생성 계획
 ```
@@ -71,6 +70,7 @@ Either you have not created any objects yet or the existing objects were already
 Terraform.
 
 Destroy complete! Resources: 0 destroyed.
+```
 
 
 ## EC2 구성
@@ -95,6 +95,12 @@ pem 파일, 스토리지, 리전, 이름, ...
 ```
 
 ### 세부 구성
+- *.tf 파일은 1개만 구성해도 OK, n개(리소스별등) 구생해도 OK
+- n개의 tf로 구성이 되도, 생성 순서에 따라 구동 흐름이 자동 조장됨 (plan, graph등 명령을 통해 확인 가능)
+
+- xxx.pem
+     - 계정별 인증키 생성>보관
+
 - variables.tf
     - 리전, 인스턴스 유형, 키이름 설정
     - provider.tf 변수 사용
@@ -104,13 +110,16 @@ pem 파일, 스토리지, 리전, 이름, ...
             ---
             Success! The configuration is valid.
         ```
+
 - provider.tf
      - 구성에 필요한 패키지등 사용 버전
      - 리전등
 
 - main.tf
-     - 통합적으로 구성 ( VPC(기본) -> SUBNETS(기본) -> 보안그룹(동적생성) -> OS 이미지 조회/선택:AmazonLinux2 -> EC2 생성 선언 -> Elatic IP 생성 연결 )
-     - 클라우드 내부에 나만 사용하는 사설네트워크(VPC관련 전체 리소스) 만 제외하고 전체 구성을 동적으로 생성
-     - VPC는 리전별로 기본이 하나씩 구성되어 있다 (없으면 생성 가능)
-     - VPC는 리전별로 기본이 하나씩 구성되어 있다 (없으면 생성 가능)
-          - 현재 ap-northeast-2(서울)의 기본 VPC는 서브넷 4개, 라우팅 테이블 1개, 인터넷게이트웨이 1개(서브넷 4개가 모두 연결되어 있음) 으로 구성되어 있음 -> 어떤 서비넷을 사용하던 EC2는 외부에서 접속 가능한 구조임
+     - 구성
+          - 통합적으로 구성 ( VPC(기본) -> SUBNETS(기본) -> 보안그룹(동적생성) -> OS 이미지 조회/선택:AmazonLinux2 -> EC2 생성 선언 -> Elatic IP 생성 연결 )
+          - 클라우드 내부에 나만 사용하는 사설네트워크(VPC관련 전체 리소스) 만 제외하고 전체 구성을 동적으로 생성
+     - vpc 조회(data)하도록 선언
+          - VPC는 리전별로 기본이 하나씩 구성되어 있다 (없으면 생성 가능)
+               - 현재 ap-northeast-2(서울)의 기본 VPC는 서브넷 4개, 라우팅 테이블 1개, 인터넷게이트웨이 1개(서브넷 4개가 모두 연결되어 있음) 으로 구성되어 있음 -> 어떤 서비넷을 사용하던 EC2는 외부에서 접속 가능한 구조임
+     - 보안 그룹 생성(resource)하도록 선언
