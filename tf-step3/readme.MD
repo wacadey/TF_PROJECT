@@ -16,10 +16,6 @@
         - NAT Gateway
         - Route Table/Route Table Assoication
         - ..
-   - NAT Gateway
-   - Route Table/Route Table Assoication
-   - ..
-    
 
 # VPC (Virtual Private Cloud)
 ## 정의
@@ -54,3 +50,50 @@
         - 하위 구성원들 직접 구성(설계)
         - 운영환경등 활용
         - 나만의 VPC o
+
+### CIDR
+    - VPC 구성시 IP 주소 범위 지정
+    ```
+        # 설정
+        10.0.0.0/16
+        ---
+        # 해석 : 앞에 16비트(2자리) 고정/ 뒤의 2자리만 커스텀가능 
+        # 0 ~ 255 사용가능 -> 256*256 조합 -> 가용한 IP는 65,536개 사용가능(실제 예약값 존재함)
+        10.0.0.10    -> OK
+        10.0.1.10    -> OK
+        10.0.255.254 -> OK
+
+        10.1.0.10    -> 불가
+    ```
+
+### 서브넷
+    - VPC를 작은 네트워크로 나눈것
+        ```
+            VPC
+            10.0.0.0/16
+            L Public   : 10.0.1.0/24
+            L Private  : 10.0.2.0/24
+            
+            ---
+            Public 대역
+                - 앞의 3자리 고정 => 나올수 있는 IP의 가지수는 이론상 10.0.1.0 ~ 10.0.1.255 : 256개
+                    - 2^(32-24)   => 가지수
+                - AWS 예약 IP (5개) -> 사용 x
+                    - 10.0.1.0 : 네트워크 주소
+                    - 10.0.1.1 : AWS VPC 라우터 주소
+                    - 10.0.1.2 : AWS DNS 서버 주소
+                    - 10.0.1.3 : AWS 미래 사용을 위한 예약용 주소
+                    - 10.0.1.255 : 브로드케스트 주소
+                - 최종 : 사용 개수 256-5 = `251개 가용 가능한`
+
+        ```
+    - 종류
+        - 퍼블릭 서브넷
+            ```
+                Internet <-> IGW <-> Route Table <-> Public Subnet <-> EC2                    
+            ```
+        - 프라이빗 서브넷
+            ```
+                Internet                       X  Route Table <-> Public Subnet <-> EC2
+                Internet  <-(pull) NAT Gateway <-> Route Table <-> Public Subnet <-> EC2
+            ```
