@@ -224,3 +224,12 @@ AWS
                        |                                       |
                        +------------------[ 인터넷  ]------------+
 ```
+
+
+# 테라폼을 이용한 Custom VPC 구성, company-vpc
+## VPC 구성
+- ~/tf-step3/vpc.tf 생성
+    - 작성
+    - terraform init
+    - terraform plan
+    - terraform apply
