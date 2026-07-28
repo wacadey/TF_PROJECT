@@ -33,3 +33,22 @@ resource "aws_internet_gateway" "company" {
       Name = "DE-AI-12-company-igw"
     }
 }
+
+# 라우트 테이블
+resource "aws_route_table" "public" {
+    vpc_id = aws_vpc.DE-AI-12-company.id
+    # 모든 IP 대역 (편의상) => IGW 전달(연결)
+    route  {
+        cidr_block = "0.0.0.0/0"
+        gateway_id = aws_internet_gateway.company.id
+    }
+    tags = {
+      Name = "DE-AI-12-company-public-rt"
+    }
+}
+
+# 최종연결 (공개용 서브넷 -> 공개용 라우트테이블)
+resource "aws_route_table_association" "public" {
+  subnet_id = aws_subnet.public.id
+  route_table_id = aws_route_table.public.id
+}
