@@ -85,3 +85,31 @@ L VPC
 
 # EC2 구성 - 각각 적절한 서브넷으로 배치 생성
 - ec2.tf
+    - 작성
+    - terraform apply
+    - AWS Console > EC2 > 본인 EC2-..WEB > 연결 > 웹브라우저에서 EC2 인스턴스 연결
+    - xx.pem Web Ec2 서버에 업로드
+    - WEB EC2 터미널
+        ```
+            # 권한 조정
+            $ chmod 400 de-ai-12.pem
+
+            # WAS 서버에 SSH로 접속 (WEB-to-WAS)
+            $ ssh -i de-ai-12.pem ec2-ec2-user@15.164.189.221
+            ---
+            The authenticity of host '10.0.2.180 (10.0.2.180)' can't be established.
+            ED25519 key fingerprint is SHA256:/wqhJhz9FChYYmUTq/jeWthAgosrqUwW/qEgdX6kEW4.
+            This key is not known by any other names
+            Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+            Warning: Permanently added '10.0.2.180' (ED25519) to the list of known hosts.
+            ,     #_
+            ~\_  ####_        Amazon Linux 2023
+            ~~  \_#####\
+            ~~     \###|
+            ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+            ~~       V~' '->
+                ~~~         /
+                ~~._.   _/
+                    _/ _/
+                _/m/'
+        ```
