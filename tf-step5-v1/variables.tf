@@ -4,7 +4,7 @@
 variable "region" {
   description = "AWS 리전"
   type        = string
-  default     = "us-east-1c"
+  default     = "us-east-1"
 }
 variable "environment" {
   description = "구동 환경"

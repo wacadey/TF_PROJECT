@@ -101,7 +101,7 @@ L [*]iam.tf       : 신규, SSM 처리 역활, 프로파일 구성, 접속관련
 L [*]provider.tf  : 공급자 정보, 리전, 공용 태그(전체 리소스 영향)
 
 L vpc.tf       : vpc, subnet, igw, nat gateway, route table/az 연결/alb, web/was, db 연결 
-L sg.tf        : 보안 그룹 -> ALB, WEB, Interal ALB, WAS, DB
+L sg.tf        : 보안 그룹 -> ALB, WEB, Internal ALB, WAS, DB
 L alb.tf       : 신규 로그밸런서 구성, 작동방식
 L asg.tf       : 신규 오토 스케일링 그룹 전략, 장애 발생시 대응, 내용 업그레이드시 교체 전략, 증감 조건 (CPU 50% 기준(예시)) 정책
 
@@ -111,6 +111,19 @@ L rds.tf       : 신규 rds 구성
 L userdata-web.sh.tftpl : 테라폼 템플릿 파일, web ec2 구성시 초기해 세팅해야할 내용 쉘스크립트 구성등 내용 포함
 L userdata-was.sh.tftpl : 테라폼 템플릿 파일, was ec2 구성시 초기해 세팅해야할 내용 쉘스크립트 구성등 내용 포함
 
+<!-- variables.tf：定义整个 Terraform 项目中使用的值，类似常量。
+locals.tf： <新增文件> 用来设置需要重复使用的值
+iam.tf： <新增文件>负责 SSM 连接相关配置，包括 IAM Role、Instance Profile 等
+provider.tf：定义 Provider、AWS Region 和公共标签，这些配置会影响整个项目中的资源
+vpc.tf：配置 VPC、Subnet、Internet Gateway、NAT Gateway、Route Table，以及 AZ、ALB、Web、WAS、DB 所需的网络连接
+sg.tf：配置安全组，包括 Public ALB、Web、Internal ALB、WAS、DB 的访问规则。
+alb.tf：<新增文件> 配置 Load Balancer 以及它的工作方式
+asg.tf：<新增文件> 配置 Auto Scaling Group，包括故障处理、版本升级时的服务器替换策略，以及根据 CPU 50% 等条件自动增减 EC2 的策略
+data.tf：查询现有资源，例如 AMI
+launch_template.tf：<新增文件> 配置 EC2 的启动模板
+rds.tf：<新增文件> 配置 Amazon RDS
+userdata-web.sh.tftpl：Terraform 模板文件，包含 Web EC2 第一次启动时要执行的初始化 Shell 脚本
+userdata-was.sh.tftpl：Terraform 模板文件，包含 WAS EC2 第一次启动时要执行的初始化 Shell 脚本 -->
 
 # SSM 관리 (AWS Systems Manager)
 - 별도의 Pem 파일 없이 접속 가능함
