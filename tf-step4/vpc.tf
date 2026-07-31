@@ -57,7 +57,7 @@ resource "aws_route_table_association" "public" {
 # NAT Gateway 작업
 #######################################
 # 1. eip
-resource "aws_eip" "DE-AI-12-IaC-TF-EIP-NAT" {  
+resource "aws_eip" "DE-AI-12-IaC-TF-EIP-NAT" {
   domain = "vpc"
   tags = {
     Name = "DE-AI-12-NAT-EIP"
@@ -67,7 +67,7 @@ resource "aws_eip" "DE-AI-12-IaC-TF-EIP-NAT" {
 resource "aws_nat_gateway" "DE-AI-12-NAT-GW" {
   # EIP 할당
   allocation_id = aws_eip.DE-AI-12-IaC-TF-EIP-NAT.id
-  subnet_id = aws_subnet.public.id
+  subnet_id     = aws_subnet.public.id
   tags = {
     Name = "DE-AI-12-NAT-GW"
   }
@@ -80,9 +80,9 @@ resource "aws_nat_gateway" "DE-AI-12-NAT-GW" {
 
 # private 서브넷 구성
 resource "aws_subnet" "private" {
-  vpc_id = aws_vpc.DE-AI-12-company.id
-  cidr_block = "10.0.2.0/24"
-  availability_zone = "ap-northeast-2a"  
+  vpc_id            = aws_vpc.DE-AI-12-company.id
+  cidr_block        = "10.0.2.0/24"
+  availability_zone = "ap-northeast-2a"
   tags = {
     Name = "DE-AI-12-private-subnet"
   }

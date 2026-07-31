@@ -2,16 +2,16 @@
 locals {
   severs = {
     web = {
-        subnet = aws_subnet.public.id
-        sg     = aws_security_group.sg["web"].id
+      subnet = aws_subnet.public.id
+      sg     = aws_security_group.sg["web"].id
     }
     was = {
-        subnet = aws_subnet.private.id
-        sg     = aws_security_group.sg["was"].id
+      subnet = aws_subnet.private.id
+      sg     = aws_security_group.sg["was"].id
     }
-    db  = {
-        subnet = aws_subnet.private.id
-        sg     = aws_security_group.sg["db"].id
+    db = {
+      subnet = aws_subnet.private.id
+      sg     = aws_security_group.sg["db"].id
     }
   }
 }
@@ -30,23 +30,23 @@ data "aws_ami" "amazon_linux" {
 }
 
 # aws_instace 생성 선언 -> 반복
-resource "aws_instance" "server" {    
-    for_each = local.severs  # 3개 준비
-    ami = data.aws_ami.amazon_linux.id
-    instance_type = var.instance_type
-    subnet_id = each.value.subnet
-    key_name = var.key_name
-    vpc_security_group_ids = [
-        each.value.sg
-    ]
-    tags = {
-      Name = "DE-AI-12-ap2-${upper(each.key)}"
-    }
-    user_data = <<-EOF
+resource "aws_instance" "server" {
+  for_each      = local.severs # 3개 준비
+  ami           = data.aws_ami.amazon_linux.id
+  instance_type = var.instance_type
+  subnet_id     = each.value.subnet
+  key_name      = var.key_name
+  vpc_security_group_ids = [
+    each.value.sg
+  ]
+  tags = {
+    Name = "DE-AI-12-ap2-${upper(each.key)}"
+  }
+  user_data = <<-EOF
         #!/bin/bash
         dnf install -y ec2-instance-connect
     EOF
-  
+
 }
 
 # 오직 web용 ec2만 EIP 생성 선언 
