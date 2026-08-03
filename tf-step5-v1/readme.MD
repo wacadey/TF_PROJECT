@@ -134,3 +134,14 @@ userdata-was.sh.tftpl：Terraform 模板文件，包含 WAS EC2 第一次启动�
     - 3. AWS 관리형 정책 연결
     - 4. EC2에 적용하는 IAM 인스턴스 프로필 생성
     - 단, 생성되는 EC2에는 SSM Agent가 설치되어 있어야함 (최신형을 통상 설치되어 있음)
+
+# 인프라 구성 완료후 
+```
+internal_alb_dns = "internal-DE-AI-25-IaC-3tier-V1-In-alb-1131590988.ap-northeast-2.elb.amazonaws.com"
+public_alb_dns = "DE-AI-25-IaC-3tier-V1-public-alb-1745651178.ap-northeast-2.elb.amazonaws.com"
+public_alb_url = "http://DE-AI-25-IaC-3tier-V1-public-alb-1745651178.ap-northeast-2.elb.amazonaws.com"  <- 주소 카피 후 브라우저에 접속 응답값 복사 백업등 3회 정도 반복
+rds_endpoint = "de-ai-25-mysql-v1.ct460c8gc44s.ap-northeast-2.rds.amazonaws.com:3306"
+rds_master_secret_arn = "arn:aws:secretsmanager:ap-northeast-2:827913617635:secret:rds!db-cdb6f01e-bad6-4493-b490-2d7b8c94a83b-8Hk8wD"
+was_asg_name = "DE-AI-25-IaC-3tier-V1-WAS-ASG"
+web_asg_name = "DE-AI-25-IaC-3tier-V1-WEB-ASG"
+```
