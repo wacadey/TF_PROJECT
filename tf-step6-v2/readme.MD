@@ -142,8 +142,19 @@
 # 적용 -> output을 구성하여 결과 확인
 ~/tf-step6> terraform -chdir="./infra"  apply
 ```
+
 5. [v]`05_vpc.tf` — VPC, 6개 Subnet, IGW, NAT Gateway, Route Table
-6. `06_iam.tf` — EKS Cluster Role과 Auto Mode Node Role
+```
+~/tf-step6> terraform -chdir="./infra"  apply
+---
+aws 콘솔 > vpc > 리소스맵 > 네트워크 구성 확인
+
+~/tf-step6> terraform -chdir="./infra"  destroy
+```
+6. [v]`06_iam.tf` — EKS Cluster Role과 Auto Mode Node Role
+```
+- 삭제시 해당 role이 삭제 않되면 => 자동화 구성시 오류 발생함(중복 역활 생성)
+```
 7. `07_logging.tf` — EKS Control Plane CloudWatch Log Group
 
 8. `08_eks.tf` — EKS Control Plane, Auto Mode, Metrics Server, Access Entry
@@ -164,3 +175,7 @@
     - Dockfile : 이미지 생성용 도커파일
     - index.html : 홈페이지(/) 프런트코드(html, css, js)
     - nginx.conf : 프록시 구성 환경설정 파일 (web->was, 기타설정)
+- was
+    - app.py : fastapi 작성된 백엔드 코드
+    - Dockerfile : 이미지 생성용 도커파일
+    - requirements.txt : 필수 패키지
