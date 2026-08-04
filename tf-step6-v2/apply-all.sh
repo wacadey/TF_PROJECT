@@ -17,7 +17,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Terraform 코드가 들어 있는 디렉터리를 지정
 INFRA_DIR="${ROOT_DIR}/infra"
 # Kubernetes Namespace 이름을 결정 : ${변수:-기본값}
-APP_NAMESPACE="${APP_NAMESPACE:-de-ai-25}"
+APP_NAMESPACE="${APP_NAMESPACE:-de-ai-12}"
 # Docker 이미지 태그를 결정
 # WEB_REPO:v3-auto, WAS_REPO:v3-auto 등 구성
 # Git commit SHA나 빌드 번호를 태그로 사용하는 경우도 다수 존재 -> 해시값
@@ -121,7 +121,7 @@ kubectl rollout status deployment/metrics-server -n kube-system --timeout=15m
 # # 2. 애플리케이션 이미지를 ECR에 빌드·Push
 
 # WEB Repository URL에서 Repository 이름을 제거하고 ECR Registry 주소만 추출
-# WEB_REPO="123456789012.dkr.ecr.ap-northeast-2.amazonaws.com/de-ai-25-web"
+# WEB_REPO="123456789012.dkr.ecr.ap-northeast-2.amazonaws.com/de-ai-12-web"
 # ECR_REGISTRY="123456789012.dkr.ecr.ap-northeast-2.amazonaws.com" <- 이렇게 처리
 # ${변수%%패턴} => ${WEB_REPO%%/*} => /부터 뒤에 있는 모든 내용을 제거
 ECR_REGISTRY="${WEB_REPO%%/*}"

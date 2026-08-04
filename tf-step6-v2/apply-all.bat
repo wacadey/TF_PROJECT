@@ -10,12 +10,12 @@ set "ROOT_DIR=%~dp0"
 if "%ROOT_DIR:~-1%"=="\" set "ROOT_DIR=%ROOT_DIR:~0,-1%"
 set "INFRA_DIR=%ROOT_DIR%\infra"
 
-if not defined APP_NAMESPACE set "APP_NAMESPACE=de-ai-25"
+if not defined APP_NAMESPACE set "APP_NAMESPACE=de-ai-12"
 if not defined IMAGE_TAG set "IMAGE_TAG=k8s-auto"
 if not defined PYTHON_CMD set "PYTHON_CMD=python"
 
-set "SECRET_JSON_FILE=%TEMP%\de-ai-25-rds-secret-%RANDOM%.json"
-set "DB_ENV_FILE=%TEMP%\de-ai-25-rds-env-%RANDOM%.txt"
+set "SECRET_JSON_FILE=%TEMP%\de-ai-12-rds-secret-%RANDOM%.json"
+set "DB_ENV_FILE=%TEMP%\de-ai-12-rds-env-%RANDOM%.txt"
 
 echo.
 echo ============================================================

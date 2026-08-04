@@ -3,7 +3,7 @@ set -Eeuo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 INFRA_DIR="${ROOT_DIR}/infra"
-APP_NAMESPACE="${APP_NAMESPACE:-de-ai-25}"
+APP_NAMESPACE="${APP_NAMESPACE:-de-ai-12}"
 
 if command -v terraform >/dev/null 2>&1 && [[ -d "${INFRA_DIR}/.terraform" ]]; then
   AWS_REGION="$(terraform -chdir="${INFRA_DIR}" output -raw aws_region 2>/dev/null || true)"
