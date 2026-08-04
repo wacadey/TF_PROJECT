@@ -30,7 +30,7 @@ resource "aws_eks_cluster" "main" {
 
     # 노드 구성 => 노드풀에서 가져와서 구성
     node_pools = [
-      "gerneral-purpose", # web, was등 pod 실행하는 용도의 node
+      "general-purpose", # web, was등 pod 실행하는 용도의 node
       "system"            # 중요 시스템 pod용
     ]
 
@@ -129,7 +129,7 @@ resource "aws_eks_addon" "metrics_server" {
 # 현재는 비워 있음 => []
 resource "aws_eks_access_entry" "admin" {
   # 등록된 사용자 수 만큼 eks 클러스터 관리자에 등록하기 위해 엔트리 반복 데이터로 배치
-  for_each = var.addtional_admin_role_arns
+  for_each = var.additional_admin_role_arns
 
   # 대상 eks 클러스터
   cluster_name = aws_eks_cluster.main.name
@@ -143,7 +143,7 @@ resource "aws_eks_access_entry" "admin" {
 # 엔트리에 등록된 IAM Role에 eks 클러스터 관리자 권한을 실제 할당
 resource "aws_eks_access_policy_association" "admin" {
   # 대상자(role등) 반복 설정
-  for_each = var.addtional_admin_role_arns
+  for_each = var.additional_admin_role_arns
 
   # 권한을 적용할 eks 클러스터
   cluster_name = aws_eks_cluster.main.name
