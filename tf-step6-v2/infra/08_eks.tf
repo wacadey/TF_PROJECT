@@ -125,7 +125,7 @@ resource "aws_eks_addon" "metrics_server" {
 # ────────────────────────────────────────────────
 # IAM Role 부분 추가 등록등 처리 - 추가 관리자 access 엔트리
 # ────────────────────────────────────────────────
-# var.addtional_admin_role_arns에 설정된 계정들도 EKS 클러스터에 접근하도록 관리 주체도 등록
+# var.additional_admin_role_arns에 설정된 계정들도 EKS 클러스터에 접근하도록 관리 주체도 등록
 # 현재는 비워 있음 => []
 resource "aws_eks_access_entry" "admin" {
   # 등록된 사용자 수 만큼 eks 클러스터 관리자에 등록하기 위해 엔트리 반복 데이터로 배치
